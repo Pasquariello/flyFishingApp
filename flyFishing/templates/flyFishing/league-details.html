@@ -1,0 +1,11 @@
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<ul>
+{%for river in rivers%}
+   <h1>{{river}}</h1> <a href="{% url 'flyFishing:edit-river-details' river.id %}">Edit</a>
+    {% for f in river.fish.all %}
+    
+             <p>{{f.species}} = {{f.basePoints}}</p> 
+             
+          {% endfor %}
+{%endfor%}
+</ul>

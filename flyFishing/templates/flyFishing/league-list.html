@@ -1,0 +1,5 @@
+{%for league in leagues%}
+
+<p>{{league}} <a href="{% url 'flyFishing:gameDetails'  league.id%}">view</a></p>
+
+{%endfor%}

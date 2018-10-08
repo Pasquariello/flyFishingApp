@@ -1,0 +1,79 @@
+
+{% load bootstrap3 %}
+
+{# Load CSS and JavaScript #}
+{% bootstrap_css %}
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+{% bootstrap_javascript %}
+
+
+
+
+<div class="container">
+<form method="post">{%csrf_token%}
+    {% for field in leagueform %}
+        <div class="fieldWrapper">
+            {{ field.errors }}
+            {{ field.label_tag }} {{ field }}
+            {% if field.help_text %}
+            <p class="help">{{ field.help_text|safe }}</p>
+            {% endif %}
+        </div>
+    {% endfor %}
+
+<h3>Rivers</h3>
+<input type="button" class="btn btn-success" value="Add More Rivers" id="add_more">
+{{ formset.management_form }}
+<div id="form_set">
+    {% for river in formset %}
+    {{river.id}}
+            {{ river.as_table }}
+    {% endfor %}
+</div>
+<div id="empty_form" style="display:none">
+    <table class='no_error'>
+        {{ formset.empty_form.as_table }}
+    </table>
+</div>
+<h3>Fish</h3>
+<input type="button" class="btn btn-success" value="Add More Fish" id="add_more_fish">
+{{ fishformset.management_form }}
+<div id="form_set_fish">
+    {% for fish in fishformset %}
+    {{fish.id}}
+            {{ fish.as_table }}
+    {% endfor %}
+</div>
+<div id="empty_form_fish" style="display:none">
+    <table class='no_error'>
+        
+        {{ fishformset.empty_form.as_table }}
+    </table>
+</div>
+<br>
+<input class="btn btn-primary"  type="submit">
+</form>
+
+</div>
+
+
+
+
+ <script>
+    $('#add_more').click(function() {
+        var form_idx = $('#id_river-TOTAL_FORMS').val();
+        $('#form_set').append($('#empty_form').html().replace(/__prefix__/g, form_idx));
+        $('#id_river-TOTAL_FORMS').val(parseInt(form_idx) + 1);
+    });
+
+     $('#add_more_fish').click(function() {
+        var form_idx = $('#id_fish-TOTAL_FORMS').val();
+        $('#form_set_fish').append($('#empty_form_fish').html().replace(/__prefix__/g, form_idx));
+        $('#id_fish-TOTAL_FORMS').val(parseInt(form_idx) + 1);
+    });
+
+</script> 
+<div class="container">
+
+
+</div>

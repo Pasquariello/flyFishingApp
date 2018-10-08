@@ -1,0 +1,35 @@
+<!-- {{river}}
+<br> -->
+<h1>{{river}}</h1>
+<p>Set available fish and fish values for this River</p>
+
+{{river.fish_set}}
+
+{%for f in fish%}
+{{f.species}}
+{{f.basePoints}}
+<input value='{{f.basePoints}}' type="number">
+{%endfor%}
+<br>
+==========================================================
+<br>
+<br>
+
+
+<form method="post">
+    {%csrf_token%}
+    {{ formset.management_form }}
+    {%for form in formset%}
+    {{form.instance}}
+   
+    <br>
+    {{form}}
+    
+    <br>
+    {%endfor%} 
+    <br>
+    <br>
+    <input type="submit" value="submit">
+    </form>
+
+    
